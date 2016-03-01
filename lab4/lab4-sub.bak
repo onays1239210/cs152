@@ -1,0 +1,67 @@
+#lang racket
+
+;; PART 1 -- Introduction to Lambda Calculus
+;;
+;; Lambda-calculus is the world's smallest programming language.
+;; In its entirety, it consists of:
+;; *functions (sometimes called abstractions)
+;; *function application
+;; *variables
+
+;; Let's start with the simple identity function:
+
+(define id (λ(x) x))
+
+;; Calling this function on itself, what is the result?
+(id id)
+
+;; Despite the minimal nature of lambda-calculus, it is Turing-complete,
+;; and we can encode a wide array of language features.
+
+;; PART 2 -- Boolean values
+;;
+;; To begin with, lets define boolean values.
+;; We will name them 'tru' and 'fls' to avoid confusion with Racket's
+;; own constructs.
+
+(define tru (λ(x) (λ(y) x)))
+(define fls (λ(x) (λ(y) y)))
+
+;; Defining booleans as functions may seem odd.  In this case,
+;; 'tru' is really 'returnFirstParameter' and 'fls' is
+;; 'returnSecondParameter'.  We can use these values to form an
+;; 'if then else' construct, which we will call 'test':
+
+(define test (λ(cond) (λ(thn) (λ(els) ((cond thn) els)))))
+
+;; The above function takes the boolean value and then applies it to the two
+;; expressions.  In the case that it is 'tru', it will result in
+;; returning the first expression.  If it is 'false', it will return
+;; the second expression.  (Note that these expressions are curried,
+;; so the syntax may look a little strange).
+
+(((test tru) tru) fls)
+(((test fls) tru) fls)
+
+;; Reading #<prodedure:tru>, #<procedure:fls> is kind of ugly.
+;; Is there a way that we can translate it to something similar to scheme?
+;; As it turns out, we can use the test function that we have created.
+
+(define (lambda->bool lam)
+  (((test lam) #t) #f))
+
+"check number"
+(define (lambda->num  x)
+  (((test x) x) #f))
+
+(define bool->num (λ(x) (print x)))
+
+
+(define succ (λ(x) (+ x 1)))
+(define pred (λ(x) (- x 1)))
+(define (bool->succ x)
+  (succ x))
+
+(lambda->num (bool->num 1232))
+(lambda->bool (bool->num "asda"))
+(lambda->bool (bool->succ 1232))

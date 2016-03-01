@@ -1,0 +1,27 @@
+Download and install node from http://nodejs.org/.
+Run the interactive interpreter by typing `node`.
+
+Part 1) Functional programming in JavaScript
+Download http://cs.sjsu.edu/~austin/cs252-fall13/lab8/functional.js.
+Implement the foldr, foldl, and map functions.
+Write the curry method that we discussed in class and
+use it to create a "double" function.
+
+Part 2) Object-oriented programming in JavaScript.
+Create a 'Student' constructor, like we did for Cat in class.
+It should have the following fields:
+*firstName
+*lastName
+*studentID
+*display -- A function that prints out the firstName, lastName, and studentID number.
+      To invoke it, you should call `student.display()`.
+
+Create an array of new students.
+Add a 'graduated' property to just one of your students.
+
+Now create another student **without** using the constructor.
+(In other words, use the object literal `{}` syntax).
+Set the prototype chain manually using the __proto__ field.
+Make sure the display method still works (without you having to add it to the object explicitly).
+
+

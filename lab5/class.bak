@@ -1,0 +1,6 @@
+#lang racket
+(define (make-adder x)
+  (lambda(y) (+ x y)))
+(define inc (make-adder 1))
+
+(inc 2)

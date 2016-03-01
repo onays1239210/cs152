@@ -1,0 +1,11 @@
+#lang racket
+
+(define x 99)
+
+(define-syntax-rule (switch x)
+  (cond [(= x 3) (displayln "x is 3")]
+        [(= x 4) (displayln "x is 4")]
+        [(= x 5) (displayln "x is 5")]
+        [else (displayln "none of the above")]))
+
+(switch x)

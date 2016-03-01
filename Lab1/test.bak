@@ -1,0 +1,4 @@
+#lang racket
+(define (comepar lst)
+       (cond [> (car lst) 3) (car lst)]
+            [< (car lst) 3] 3)
